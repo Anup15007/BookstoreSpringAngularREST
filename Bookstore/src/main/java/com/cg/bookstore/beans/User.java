@@ -1,15 +1,19 @@
 package com.cg.bookstore.beans;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 
 public class User {
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	long userId;
 	@NotNull
 	String userName;
 	@NotNull
 	String password;
+	String userType;
 	public User() {
 		super();
 	}
@@ -35,6 +39,12 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getUserType() {
+		return userType;
+	}
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 	@Override
 	public int hashCode() {
