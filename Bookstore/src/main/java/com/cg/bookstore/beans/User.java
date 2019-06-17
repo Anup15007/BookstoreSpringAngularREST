@@ -1,5 +1,6 @@
 package com.cg.bookstore.beans;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.validation.constraints.NotNull;
@@ -8,31 +9,33 @@ import org.springframework.data.annotation.Id;
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	long userId;
+	private long userId;
 	@NotNull
-	String userName;
+	@Column(unique=true)
+	private String userEmailId;
 	@NotNull
-	String password;
-	String userType;
+	private String password;
+	private String userType;
 	public User() {
 		super();
 	}
-	public User(@NotNull String userName, @NotNull String password) {
+	public User(@NotNull String userEmailId, @NotNull String password) {
 		super();
-		this.userName = userName;
+		this.userEmailId = userEmailId;
 		this.password = password;
 	}
-	public long getUserId() {
-		return userId;
-	}
-	public void setUserId(long userId) {
+	public User(long userId, @NotNull String userEmailId, @NotNull String password, String userType) {
+		super();
 		this.userId = userId;
+		this.userEmailId = userEmailId;
+		this.password = password;
+		this.userType = userType;
 	}
-	public String getUserName() {
-		return userName;
+	public String getUserEmailId() {
+		return userEmailId;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserEmailId(String userEmailId) {
+		this.userEmailId = userEmailId;
 	}
 	public String getPassword() {
 		return password;
@@ -51,8 +54,9 @@ public class User {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((userEmailId == null) ? 0 : userEmailId.hashCode());
 		result = prime * result + (int) (userId ^ (userId >>> 32));
-		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+		result = prime * result + ((userType == null) ? 0 : userType.hashCode());
 		return result;
 	}
 	@Override
@@ -69,17 +73,23 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (userEmailId == null) {
+			if (other.userEmailId != null)
+				return false;
+		} else if (!userEmailId.equals(other.userEmailId))
+			return false;
 		if (userId != other.userId)
 			return false;
-		if (userName == null) {
-			if (other.userName != null)
+		if (userType == null) {
+			if (other.userType != null)
 				return false;
-		} else if (!userName.equals(other.userName))
+		} else if (!userType.equals(other.userType))
 			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + "]";
+		return "User [userId=" + userId + ", userEmailId=" + userEmailId + ", password=" + password + ", userType="
+				+ userType + "]";
 	}
 }
