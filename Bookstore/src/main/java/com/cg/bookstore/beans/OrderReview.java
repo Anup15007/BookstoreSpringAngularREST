@@ -1,7 +1,13 @@
 package com.cg.bookstore.beans;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.Email;
+
+@Entity
 public class OrderReview {
-	String emailId;
+	@Id
+	String customerEmailId;
 	String bookName;
 	String customerReviewComment;
 	String customerReviewHeadline;
@@ -9,20 +15,20 @@ public class OrderReview {
 	public OrderReview() {
 		super();
 	}
-	public OrderReview(String emailId, String bookName, String customerReviewComment, String customerReviewHeadline,
-			double rating) {
+	public OrderReview(@Email String customerEmailId, String bookName, String customerReviewComment,
+			String customerReviewHeadline, double rating) {
 		super();
-		this.emailId = emailId;
+		this.customerEmailId = customerEmailId;
 		this.bookName = bookName;
 		this.customerReviewComment = customerReviewComment;
 		this.customerReviewHeadline = customerReviewHeadline;
 		this.rating = rating;
 	}
-	public String getEmailId() {
-		return emailId;
+	public String getCustomerEmailId() {
+		return customerEmailId;
 	}
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+	public void setCustomerEmailId(String customerEmailId) {
+		this.customerEmailId = customerEmailId;
 	}
 	public String getBookName() {
 		return bookName;
@@ -53,9 +59,9 @@ public class OrderReview {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((bookName == null) ? 0 : bookName.hashCode());
+		result = prime * result + ((customerEmailId == null) ? 0 : customerEmailId.hashCode());
 		result = prime * result + ((customerReviewComment == null) ? 0 : customerReviewComment.hashCode());
 		result = prime * result + ((customerReviewHeadline == null) ? 0 : customerReviewHeadline.hashCode());
-		result = prime * result + ((emailId == null) ? 0 : emailId.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(rating);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -75,6 +81,11 @@ public class OrderReview {
 				return false;
 		} else if (!bookName.equals(other.bookName))
 			return false;
+		if (customerEmailId == null) {
+			if (other.customerEmailId != null)
+				return false;
+		} else if (!customerEmailId.equals(other.customerEmailId))
+			return false;
 		if (customerReviewComment == null) {
 			if (other.customerReviewComment != null)
 				return false;
@@ -85,18 +96,13 @@ public class OrderReview {
 				return false;
 		} else if (!customerReviewHeadline.equals(other.customerReviewHeadline))
 			return false;
-		if (emailId == null) {
-			if (other.emailId != null)
-				return false;
-		} else if (!emailId.equals(other.emailId))
-			return false;
 		if (Double.doubleToLongBits(rating) != Double.doubleToLongBits(other.rating))
 			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "OrderReview [emailId=" + emailId + ", bookName=" + bookName + ", customerReviewComment="
+		return "OrderReview [customerEmailId=" + customerEmailId + ", bookName=" + bookName + ", customerReviewComment="
 				+ customerReviewComment + ", customerReviewHeadline=" + customerReviewHeadline + ", rating=" + rating
 				+ "]";
 	}

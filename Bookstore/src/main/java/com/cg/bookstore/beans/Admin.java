@@ -1,34 +1,40 @@
 package com.cg.bookstore.beans;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.Email;
+
+@Entity
 public class Admin{
-	User user;
-	String adminFullname;
+	@Id
+	String adminEmailId;
+	String password;
 	public Admin() {
 		super();
 	}
-	public Admin(User user,String adminFullname) {
+	public Admin(@Email String adminEmailId, String password) {
 		super();
-		this.adminFullname = adminFullname;
-		this.user = user;
+		this.adminEmailId = adminEmailId;
+		this.password = password;
 	}
-	public String getAdminFullname() {
-		return adminFullname;
+	public String getAdminEmailId() {
+		return adminEmailId;
 	}
-	public void setAdminFullname(String adminFullname) {
-		this.adminFullname = adminFullname;
+	public void setAdminEmailId(String adminEmailId) {
+		this.adminEmailId = adminEmailId;
 	}
-	public User getUser() {
-		return user;
+	public String getPassword() {
+		return password;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((adminFullname == null) ? 0 : adminFullname.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + ((adminEmailId == null) ? 0 : adminEmailId.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		return result;
 	}
 	@Override
@@ -40,17 +46,20 @@ public class Admin{
 		if (getClass() != obj.getClass())
 			return false;
 		Admin other = (Admin) obj;
-		if (adminFullname == null) {
-			if (other.adminFullname != null)
+		if (adminEmailId == null) {
+			if (other.adminEmailId != null)
 				return false;
-		} else if (!adminFullname.equals(other.adminFullname))
+		} else if (!adminEmailId.equals(other.adminEmailId))
 			return false;
-		if (user == null) {
-			if (other.user != null)
+		if (password == null) {
+			if (other.password != null)
 				return false;
-		} else if (!user.equals(other.user))
+		} else if (!password.equals(other.password))
 			return false;
 		return true;
 	}
-	
+	@Override
+	public String toString() {
+		return "Admin [adminEmailId=" + adminEmailId + ", password=" + password + "]";
+	}
 }

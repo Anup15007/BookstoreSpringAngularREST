@@ -1,37 +1,47 @@
 package com.cg.bookstore.beans;
 
-import java.util.List;
-
-import javax.persistence.Column;
+import java.util.Map;
 import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
 
+@Entity
 public class Customer{
-	User user;
+	@Id
+	String customerEmailId;
+	String password;
 	private String customerFullName;
-	@OneToMany(mappedBy = "customer")
 	@Embedded
 	private Address customerAddress;
 	@OneToMany(mappedBy = "customer")
-	private List<Order> customerOrders;
+	private Map<Long, OrderItem> customerOrders;
 	private String customerPhone;
 	public Customer() {
 		super();
 	}
-	public Customer(User user, String customerFullName, Address customerAddress, List<Order> customerOrders,
-			String customerPhone) {
+	public Customer(@Email String customerEmailId, String password, String customerFullName, Address customerAddress,
+			Map<Long, OrderItem> customerOrders, String customerPhone) {
 		super();
-		this.user = user;
+		this.customerEmailId = customerEmailId;
+		this.password = password;
 		this.customerFullName = customerFullName;
 		this.customerAddress = customerAddress;
 		this.customerOrders = customerOrders;
 		this.customerPhone = customerPhone;
 	}
-	public User getUser() {
-		return user;
+	public String getCustomerEmailId() {
+		return customerEmailId;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setCustomerEmailId(String customerEmailId) {
+		this.customerEmailId = customerEmailId;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getCustomerFullName() {
 		return customerFullName;
@@ -45,10 +55,10 @@ public class Customer{
 	public void setCustomerAddress(Address customerAddress) {
 		this.customerAddress = customerAddress;
 	}
-	public List<Order> getCustomerOrders() {
+	public Map<Long, OrderItem> getCustomerOrders() {
 		return customerOrders;
 	}
-	public void setCustomerOrders(List<Order> customerOrders) {
+	public void setCustomerOrders(Map<Long, OrderItem> customerOrders) {
 		this.customerOrders = customerOrders;
 	}
 	public String getCustomerPhone() {
@@ -60,19 +70,20 @@ public class Customer{
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = super.hashCode();
+		int result = 1;
 		result = prime * result + ((customerAddress == null) ? 0 : customerAddress.hashCode());
+		result = prime * result + ((customerEmailId == null) ? 0 : customerEmailId.hashCode());
 		result = prime * result + ((customerFullName == null) ? 0 : customerFullName.hashCode());
 		result = prime * result + ((customerOrders == null) ? 0 : customerOrders.hashCode());
 		result = prime * result + ((customerPhone == null) ? 0 : customerPhone.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		return result;
 	}
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -81,6 +92,11 @@ public class Customer{
 			if (other.customerAddress != null)
 				return false;
 		} else if (!customerAddress.equals(other.customerAddress))
+			return false;
+		if (customerEmailId == null) {
+			if (other.customerEmailId != null)
+				return false;
+		} else if (!customerEmailId.equals(other.customerEmailId))
 			return false;
 		if (customerFullName == null) {
 			if (other.customerFullName != null)
@@ -97,16 +113,17 @@ public class Customer{
 				return false;
 		} else if (!customerPhone.equals(other.customerPhone))
 			return false;
-		if (user == null) {
-			if (other.user != null)
+		if (password == null) {
+			if (other.password != null)
 				return false;
-		} else if (!user.equals(other.user))
+		} else if (!password.equals(other.password))
 			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "Customer [user=" + user + ", customerFullName=" + customerFullName + ", customerAddress="
-				+ customerAddress + ", customerOrders=" + customerOrders + ", customerPhone=" + customerPhone + "]";
+		return "Customer [customerEmailId=" + customerEmailId + ", password=" + password + ", customerFullName="
+				+ customerFullName + ", customerAddress=" + customerAddress + ", customerOrders=" + customerOrders
+				+ ", customerPhone=" + customerPhone + "]";
 	}
 }

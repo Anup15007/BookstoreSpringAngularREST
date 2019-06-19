@@ -1,7 +1,7 @@
 package com.cg.bookstore.daoservices;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.cg.bookstore.beans.Order;
+import com.cg.bookstore.beans.OrderItem;
 
-public interface OrderDAO extends JpaRepository<Order, Long>{
+public interface OrderDAO extends JpaRepository<OrderItem, Long>{
 }

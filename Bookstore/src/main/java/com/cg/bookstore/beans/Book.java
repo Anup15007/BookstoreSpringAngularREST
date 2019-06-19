@@ -1,15 +1,17 @@
 package com.cg.bookstore.beans;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import org.springframework.data.annotation.Id;
 
+@Entity
 public class Book {
 	@Id
 	private long bookIsbn;
-	@NotNull
 	private String bookTitle;
-	@NotNull
 	private double bookPrice;
 	private String authorName;
 	private String bookPublishDate;
@@ -17,7 +19,7 @@ public class Book {
 	private String bookImage;
 	private String bookCategory;
 	@ManyToOne
-	Order order;
+	OrderItem order;
 	public Book() {
 		super();
 	}
@@ -28,7 +30,7 @@ public class Book {
 		this.bookPrice = bookPrice;
 	}
 	public Book(long bookIsbn, @NotNull String bookTitle, @NotNull double bookPrice, String authorName,
-			String bookPublishDate, String bookDescription, String bookImage, String bookCategory, Order order) {
+			String bookPublishDate, String bookDescription, String bookImage, String bookCategory, OrderItem order) {
 		super();
 		this.bookIsbn = bookIsbn;
 		this.bookTitle = bookTitle;
@@ -88,10 +90,10 @@ public class Book {
 	public void setBookCategory(String bookCategory) {
 		this.bookCategory = bookCategory;
 	}
-	public Order getOrder() {
+	public OrderItem getOrder() {
 		return order;
 	}
-	public void setOrder(Order order) {
+	public void setOrder(OrderItem order) {
 		this.order = order;
 	}
 	@Override
