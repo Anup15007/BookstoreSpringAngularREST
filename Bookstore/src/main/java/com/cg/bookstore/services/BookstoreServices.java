@@ -1,6 +1,8 @@
 package com.cg.bookstore.services;
 
 import java.util.List;
+
+import com.cg.bookstore.beans.Address;
 import com.cg.bookstore.beans.Admin;
 import com.cg.bookstore.beans.Book;
 import com.cg.bookstore.beans.Category;
@@ -18,7 +20,7 @@ public interface BookstoreServices {
 	Admin acceptAdminDetails(Admin admin);
 	Customer customerLogin(String customerEmailId, String password) throws InvalidUserDetailsException, CustomerDetailsNotFoundException;
 	Admin adminLogin(String adminEmailId, String password) throws InvalidUserDetailsException, AdminDetailsNotFoundException;
-	Customer editProfile(String customerEmailId, String Password) throws CustomerDetailsNotFoundException, InvalidUserDetailsException;
+	Customer editProfile(String customerEmailId, Address customerAddress) throws CustomerDetailsNotFoundException;
 	Category addCategory(Category category);
 	List<Book> getAllBookDetails();
 	List<OrderItem> getAllOrderDetails();

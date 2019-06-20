@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.cg.bookstore.beans.Address;
 import com.cg.bookstore.beans.Admin;
 import com.cg.bookstore.beans.Book;
 import com.cg.bookstore.beans.Category;
@@ -103,9 +104,10 @@ public class BookstoreServicesImpl implements BookstoreServices{
 		return admin;
 	}
 	@Override
-	public Customer editProfile(String customerEmailId, String Password)
+	public Customer editProfile(String customerEmailId, Address customerAddress)
 			throws CustomerDetailsNotFoundException, InvalidUserDetailsException {
 		Customer customer = getCustomerDetails(customerEmailId);
+		customer.setCustomerAddress(customerAddress);
 		return customerDao.save(customer);
 	}
 }
