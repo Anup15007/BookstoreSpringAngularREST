@@ -12,7 +12,7 @@ public class Admin{
 	public Admin() {
 		super();
 	}
-	public Admin(@Email String adminEmailId, String password) {
+	public Admin(String adminEmailId, String password) {
 		super();
 		this.adminEmailId = adminEmailId;
 		this.password = password;

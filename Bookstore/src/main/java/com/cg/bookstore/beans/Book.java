@@ -23,13 +23,13 @@ public class Book {
 	public Book() {
 		super();
 	}
-	public Book(long bookIsbn, @NotNull String bookTitle, @NotNull double bookPrice) {
+	public Book(long bookIsbn, String bookTitle, double bookPrice) {
 		super();
 		this.bookIsbn = bookIsbn;
 		this.bookTitle = bookTitle;
 		this.bookPrice = bookPrice;
 	}
-	public Book(long bookIsbn, @NotNull String bookTitle, @NotNull double bookPrice, String authorName,
+	public Book(long bookIsbn, String bookTitle, double bookPrice, String authorName,
 			String bookPublishDate, String bookDescription, String bookImage, String bookCategory, OrderItem order) {
 		super();
 		this.bookIsbn = bookIsbn;

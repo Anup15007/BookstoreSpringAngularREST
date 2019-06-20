@@ -20,7 +20,7 @@ public interface BookstoreServices {
 	Admin acceptAdminDetails(Admin admin);
 	Customer customerLogin(String customerEmailId, String password) throws InvalidUserDetailsException, CustomerDetailsNotFoundException;
 	Admin adminLogin(String adminEmailId, String password) throws InvalidUserDetailsException, AdminDetailsNotFoundException;
-	Customer editProfile(String customerEmailId, Address customerAddress) throws CustomerDetailsNotFoundException;
+	Customer editProfile(String customerEmailId, Address customerAddress) throws CustomerDetailsNotFoundException, InvalidUserDetailsException;
 	Category addCategory(Category category);
 	List<Book> getAllBookDetails();
 	List<OrderItem> getAllOrderDetails();

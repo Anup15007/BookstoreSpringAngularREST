@@ -21,13 +21,6 @@ public class Customer{
 	public Customer() {
 		super();
 	}
-	public Customer(String customerEmailId, String password, String customerFullName, String customerPhone) {
-		super();
-		this.customerEmailId = customerEmailId;
-		this.password = password;
-		this.customerFullName = customerFullName;
-		this.customerPhone = customerPhone;
-	}
 	public Customer(String customerEmailId, String password, String customerFullName, Address customerAddress,
 			String customerPhone) {
 		super();
@@ -37,7 +30,7 @@ public class Customer{
 		this.customerAddress = customerAddress;
 		this.customerPhone = customerPhone;
 	}
-	public Customer(@Email String customerEmailId, String password, String customerFullName, Address customerAddress,
+	public Customer(String customerEmailId, String password, String customerFullName, Address customerAddress,
 			Map<Long, OrderItem> customerOrders, String customerPhone) {
 		super();
 		this.customerEmailId = customerEmailId;
