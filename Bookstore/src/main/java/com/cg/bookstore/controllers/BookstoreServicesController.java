@@ -40,24 +40,24 @@ public class BookstoreServicesController {
 	@RequestMapping(value= {"/acceptBookDetails"}, method=RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public ResponseEntity<String> acceptBookDetails(@ModelAttribute Book book){
 		book = bookstoreServices.acceptBookDetails(book);
-		return new ResponseEntity<>("Customer Details successfully added. \n Book Id : "+book.getBookIsbn(),HttpStatus.OK);
+		return new ResponseEntity<>("Book Details successfully added. \n Book Id : "+book.getBookIsbn(),HttpStatus.OK);
 	}
 	@RequestMapping(value= {"/acceptAdminDetails"}, method=RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public ResponseEntity<String> acceptAdminDetails(@ModelAttribute Admin admin){
 		admin = bookstoreServices.acceptAdminDetails(admin);
-		return new ResponseEntity<>("Customer Details successfully added. \n Book Id : "+admin.getAdminEmailId(),HttpStatus.OK);
+		return new ResponseEntity<>("Admin Details successfully added. \n Admin Id : "+admin.getAdminEmailId(),HttpStatus.OK);
 	}
-	@RequestMapping(value= {"/getBookDetails"}, method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, headers = "Accept = application/json")
+	@RequestMapping(value= {"/getBookDetails"}, method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Book> getBookDetailsRequestParam(@RequestParam long bookIsbn) throws BookDetailsNotFoundException{
 		Book book = bookstoreServices.getBookDetails(bookIsbn);
 		return new ResponseEntity<Book>(book,HttpStatus.OK);
 	}
-	@RequestMapping(value= {"/getCustomerDetails"}, method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, headers = "Accept = application/json")
+	@RequestMapping(value= {"/getCustomerDetails"}, method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Customer> getCustomerDetailsRequestParam(@RequestParam String customerEmailId) throws CustomerDetailsNotFoundException{
 		Customer customer = bookstoreServices.getCustomerDetails(customerEmailId);
 		return new ResponseEntity<Customer>(customer,HttpStatus.OK);
 	}
-	@RequestMapping(value= {"/getOrderDetails"}, method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, headers = "Accept = application/json")
+	@RequestMapping(value= {"/getOrderDetails"}, method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<OrderItem> getOrderDetailsRequestParam(@RequestParam long orderId) throws CustomerDetailsNotFoundException{
 		OrderItem order = bookstoreServices.getOrderDetails(orderId);
 		return new ResponseEntity<OrderItem>(order,HttpStatus.OK);
