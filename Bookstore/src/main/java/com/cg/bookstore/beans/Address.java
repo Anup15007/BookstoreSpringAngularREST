@@ -5,11 +5,11 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Address {
 	String street, area, city, country;
-	int zip;
+	long zip;
 	public Address() {
 		super();
 	}
-	public Address(String street, String area, String city, String country, int zip) {
+	public Address(String street, String area, String city, String country, long zip) {
 		super();
 		this.street = street;
 		this.area = area;
@@ -41,10 +41,10 @@ public class Address {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public int getZip() {
+	public long getZip() {
 		return zip;
 	}
-	public void setZip(int zip) {
+	public void setZip(long zip) {
 		this.zip = zip;
 	}
 	@Override
@@ -55,7 +55,7 @@ public class Address {
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((street == null) ? 0 : street.hashCode());
-		result = prime * result + zip;
+		result = prime * result + (int) (zip ^ (zip >>> 32));
 		return result;
 	}
 	@Override

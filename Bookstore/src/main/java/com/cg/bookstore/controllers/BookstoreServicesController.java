@@ -1,5 +1,7 @@
 package com.cg.bookstore.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cg.bookstore.beans.Address;
 import com.cg.bookstore.beans.Admin;
 import com.cg.bookstore.beans.Book;
+import com.cg.bookstore.beans.Category;
 import com.cg.bookstore.beans.Customer;
 import com.cg.bookstore.beans.OrderItem;
 import com.cg.bookstore.exceptions.AdminDetailsNotFoundException;
@@ -47,6 +51,11 @@ public class BookstoreServicesController {
 		admin = bookstoreServices.acceptAdminDetails(admin);
 		return new ResponseEntity<>("Admin Details successfully added. \n Admin Id : "+admin.getAdminEmailId(),HttpStatus.OK);
 	}
+	@RequestMapping(value= {"/addCategory"}, method=RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public ResponseEntity<String> addCategory(@ModelAttribute Category category){
+		category = bookstoreServices.addCategory(category);
+		return new ResponseEntity<>("Category successfully added. "+category,HttpStatus.OK);
+	}
 	@RequestMapping(value= {"/getBookDetails"}, method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Book> getBookDetailsRequestParam(@RequestParam long bookIsbn) throws BookDetailsNotFoundException{
 		Book book = bookstoreServices.getBookDetails(bookIsbn);
@@ -61,6 +70,15 @@ public class BookstoreServicesController {
 	public ResponseEntity<OrderItem> getOrderDetailsRequestParam(@RequestParam long orderId) throws CustomerDetailsNotFoundException{
 		OrderItem order = bookstoreServices.getOrderDetails(orderId);
 		return new ResponseEntity<OrderItem>(order,HttpStatus.OK);
+	}
+	@RequestMapping(value= {"/getCategoryDetails"}, method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Category> getCategoryDetailsRequestParam(@RequestParam int categoryId) throws CustomerDetailsNotFoundException{
+		Category category = bookstoreServices.getCategoryDetails(categoryId);
+		return new ResponseEntity<Category>(category,HttpStatus.OK);
+	}
+	@RequestMapping(value= {"/getAllCategoryDetails"}, method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Category>> getCategoryDetailsRequestParam() throws CustomerDetailsNotFoundException{
+		return new ResponseEntity<List<Category>>( bookstoreServices.getAllCategoryDetails(),HttpStatus.OK);
 	}
 	@RequestMapping("/adminLogin")
 	public ModelAndView adminLogin(@RequestParam String adminEmailId, String password, HttpSession session) throws AdminDetailsNotFoundException, InvalidUserDetailsException {

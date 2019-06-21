@@ -8,6 +8,7 @@ import javax.validation.constraints.Email;
 public class Admin{
 	@Id
 	String adminEmailId;
+	String adminFullName;
 	String password;
 	public Admin() {
 		super();
@@ -17,11 +18,23 @@ public class Admin{
 		this.adminEmailId = adminEmailId;
 		this.password = password;
 	}
+	public Admin(String adminEmailId, String adminFullName, String password) {
+		super();
+		this.adminEmailId = adminEmailId;
+		this.adminFullName = adminFullName;
+		this.password = password;
+	}
 	public String getAdminEmailId() {
 		return adminEmailId;
 	}
 	public void setAdminEmailId(String adminEmailId) {
 		this.adminEmailId = adminEmailId;
+	}
+	public String getAdminFullName() {
+		return adminFullName;
+	}
+	public void setAdminFullName(String fullName) {
+		this.adminFullName = fullName;
 	}
 	public String getPassword() {
 		return password;
@@ -34,6 +47,7 @@ public class Admin{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((adminEmailId == null) ? 0 : adminEmailId.hashCode());
+		result = prime * result + ((adminFullName == null) ? 0 : adminFullName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		return result;
 	}
@@ -51,6 +65,11 @@ public class Admin{
 				return false;
 		} else if (!adminEmailId.equals(other.adminEmailId))
 			return false;
+		if (adminFullName == null) {
+			if (other.adminFullName != null)
+				return false;
+		} else if (!adminFullName.equals(other.adminFullName))
+			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
@@ -60,6 +79,6 @@ public class Admin{
 	}
 	@Override
 	public String toString() {
-		return "Admin [adminEmailId=" + adminEmailId + ", password=" + password + "]";
+		return "Admin [adminEmailId=" + adminEmailId + ", adminFullName=" + adminFullName + ", password=" + password + "]";
 	}
 }

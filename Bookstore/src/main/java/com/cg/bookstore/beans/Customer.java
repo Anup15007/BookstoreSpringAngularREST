@@ -5,7 +5,6 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Email;
 
 @Entity
 public class Customer{
@@ -20,6 +19,12 @@ public class Customer{
 	private String customerPhone;
 	public Customer() {
 		super();
+	}
+	public Customer(String customerEmailId, String password, String customerFullName) {
+		super();
+		this.customerEmailId = customerEmailId;
+		this.password = password;
+		this.customerFullName = customerFullName;
 	}
 	public Customer(String customerEmailId, String password, String customerFullName, Address customerAddress,
 			String customerPhone) {

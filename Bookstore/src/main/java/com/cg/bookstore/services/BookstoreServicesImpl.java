@@ -17,6 +17,7 @@ import com.cg.bookstore.daoservices.CustomerDAO;
 import com.cg.bookstore.daoservices.OrderDAO;
 import com.cg.bookstore.exceptions.AdminDetailsNotFoundException;
 import com.cg.bookstore.exceptions.BookDetailsNotFoundException;
+import com.cg.bookstore.exceptions.CategoryDetailsNotFoundException;
 import com.cg.bookstore.exceptions.CustomerDetailsNotFoundException;
 import com.cg.bookstore.exceptions.InvalidUserDetailsException;
 import com.cg.bookstore.exceptions.OrderDetailsNotFoundException;
@@ -109,5 +110,14 @@ public class BookstoreServicesImpl implements BookstoreServices{
 		Customer customer = getCustomerDetails(customerEmailId);
 		customer.setCustomerAddress(customerAddress);
 		return customerDao.save(customer);
+	}
+	@Override
+	public Category getCategoryDetails(int categoryId) throws CategoryDetailsNotFoundException {
+		categoryDao.findAll();
+		return null;
+	}
+	@Override
+	public List<Category> getAllCategoryDetails() {
+		return categoryDao.findAll();
 	}
 }
